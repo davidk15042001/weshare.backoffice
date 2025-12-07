@@ -47,10 +47,11 @@ class TransactionController extends Controller
         $trans = DB::connection("app")->table("transactions")
         ->join("users", "users.id", "=", "transactions.user_id")
         ->join("plans", "plans.id", "=", "transactions.plan_id")
-        ->select(["transactions.*", "plans.*", "users.*"])
-        ->first();
+        ->select(["transactions.*", "plans.*","users.*","transactions.id AS id"])
+        ->where("transactions.id", $id)->first();
         if(!$trans)
             return back()->with("error", "No details found");
+        // return $trans;
         return view("transactions.show", ["transaction" => $trans]);
     }
 
@@ -59,8 +60,8 @@ class TransactionController extends Controller
         $trans = DB::connection("app")->table("transactions")
         ->join("users", "users.id", "=", "transactions.user_id")
         ->join("plans", "plans.id", "=", "transactions.plan_id")
-        ->select(["transactions.*", "plans.*", "users.*"])
-        ->first();
+        ->select(["transactions.*", "plans.*", "users.*", "transactions.id AS id"])
+        ->where("transactions.id", $id)->first();
         if(!$trans)
             return back()->with("error", "No details found");
         // Prepare PDF
