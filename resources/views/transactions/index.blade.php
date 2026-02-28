@@ -31,7 +31,7 @@
 
         {{-- FILTERS --}}
         <div class="bg-white p-6 shadow rounded-xl border mb-8">
-            <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <form method="GET" class="flex gap-6">
 
                 <div>
                     <label class="block mb-1 font-medium text-gray-700">Status</label>
@@ -57,9 +57,19 @@
                     <button type="submit" name="filter" value="1" class="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
                         Apply Filters
                     </button>
-                    <button type="submit" name="export" value="1" class="px-5 ml-5 py-2 outline-blue-600 text-blue-600 rounded-lg shadow hover:bg-blue-700 hover:text-white">
-                        Export
+                    <div class="flex items-center gap-3 ml-5">
+
+                    <button type="submit" name="export_type" value="excel"
+                        class="px-5 py-2 border border-green-600 text-green-600 rounded-lg shadow hover:bg-green-600 hover:text-white transition">
+                        Export Excel
                     </button>
+
+                    <button type="submit" name="export_type" value="pdf"
+                        class="px-5 py-2 border border-red-600 text-red-600 rounded-lg shadow hover:bg-red-600 hover:text-white transition">
+                        Export PDF
+                    </button>
+
+                </div>
                 </div>
             </form>
         </div>

@@ -14,7 +14,7 @@ class TransactionController extends Controller
 {
     public function index(Request $request)
     {
-        $isExport = $request->get("export");
+        $isExport = $request->get("export_type");
         $query = DB::connection("app")->table("transactions")
             ->join("users", "users.id", "=", "transactions.user_id");
 
@@ -30,11 +30,18 @@ class TransactionController extends Controller
             ->when($isExport, fn($q) => $q->get())
             ->when(!$isExport, fn($q) => $q->paginate(100));
 
-        if($isExport){
+        if($isExport == "excel"){
             return Excel::download(
                 new TransactionsExport($transactions),
                 "transactions-". now()->toDateTimeString().".xlsx"
             );
+        }
+
+        if ($isExport === 'pdf') {
+            $pdf = Pdf::loadView('exports.transactions-pdf', [
+                'transactions' => $transactions
+            ]);
+            return $pdf->download("transactions-". now()->toDateTimeString().".pdf");
         }
         // ANALYTICS
         $stats = [
