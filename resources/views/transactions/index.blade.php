@@ -59,14 +59,9 @@
                     </button>
                     <div class="flex items-center gap-3 ml-5">
 
-                    <button type="submit" name="export_type" value="excel"
-                        class="px-5 py-2 border border-green-600 text-green-600 rounded-lg shadow hover:bg-green-600 hover:text-white transition">
-                        Export Excel
-                    </button>
-
-                    <button type="submit" name="export_type" value="pdf"
-                        class="px-5 py-2 border border-red-600 text-red-600 rounded-lg shadow hover:bg-red-600 hover:text-white transition">
-                        Export PDF
+                    <button type="submit" name="export_type" value="invoice_zip"
+                        class="px-5 py-2 border border-purple-600 text-purple-600 rounded-lg shadow hover:bg-purple-600 hover:text-white transition">
+                        Download Invoices (ZIP)
                     </button>
 
                 </div>
