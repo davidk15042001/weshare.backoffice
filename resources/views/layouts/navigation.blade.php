@@ -27,6 +27,16 @@
                         {{ __('Invoices') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('enterprises.index')" :active="request()->routeIs('enterprises.*')">
+                        {{ __('Team Sites') }}
+                    </x-nav-link>
+                </div>
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('translations.index')" :active="request()->routeIs('translations.*')">
+                        {{ __('Translations') }}
+                    </x-nav-link>
+                </div> --}}
             </div>
 
             <!-- Settings Dropdown -->
@@ -86,6 +96,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('transactions.index')" :active="request()->routeIs('transactions.*')">
                 {{ __('Invoices') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('enterprises.index')" :active="request()->routeIs('enterprises.*')">
+                {{ __('Team Sites') }}
             </x-responsive-nav-link>
         </div>
 

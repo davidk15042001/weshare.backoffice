@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TransactionsExport;
 use App\Models\Transaction;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionController extends Controller
 {
     public function index(Request $request)
     {
+        $isExport = $request->get("export");
         $query = DB::connection("app")->table("transactions")
             ->join("users", "users.id", "=", "transactions.user_id");
 
@@ -24,8 +27,15 @@ class TransactionController extends Controller
 
         $transactions = $query->select(["transactions.*", "users.name"])
             ->latest()
-            ->paginate(15);
+            ->when($isExport, fn($q) => $q->get())
+            ->when(!$isExport, fn($q) => $q->paginate(100));
 
+        if($isExport){
+            return Excel::download(
+                new TransactionsExport($transactions),
+                "transactions-". now()->toDateTimeString().".xlsx"
+            );
+        }
         // ANALYTICS
         $stats = [
             'total'   => DB::connection("app")->table("transactions")->count(),

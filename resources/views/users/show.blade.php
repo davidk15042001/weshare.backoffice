@@ -25,19 +25,50 @@
         {{-- ===== SUBSCRIPTION DETAILS ===== --}}
         <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
             <h2 class="text-xl font-bold mb-4 border-b pb-2">Subscriptions</h2>
+            {{-- CHANGE PLAN --}}
+            <form method="POST"
+                action="{{ route('users.change-plan', $user->id) }}"
+                class="flex items-end gap-4 mt-3 mb-3">
+                @csrf
+
+                <div class="w-64">
+                    <label class="block text-sm font-medium text-gray-600 mb-1">
+                        Change Plan
+                    </label>
+                    <select name="plan_id"
+                            class="w-full border-gray-300 rounded-lg">
+                        @foreach($plans as $plan)
+                            <option value="{{ $plan->id }}"
+                                {{ $plan->id == $user->product ? 'selected' : '' }}>
+                                {{ $plan->name }} -
+                                {{ app_currency().number_format($plan->price,2) }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <button type="submit"
+                        class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Update Plan
+                </button>
+            </form>
+
 
             @forelse($subscriptions as $sub)
-                <div class="p-4 mb-4 rounded-xl bg-gray-50 border">
-                    <div class="grid md:grid-cols-2 gap-3 text-gray-700">
+                <div class="p-4 mb-1 rounded-xl bg-gray-50 border">
+
+                    <div class="grid md:grid-cols-2 gap-3 text-gray-700 mb-4">
                         <p><strong>Plan:</strong> {{ $sub->name }}</p>
                         <p><strong>Amount:</strong> {{ app_currency(). number_format($sub->price * $sub->quantity, 2) }}</p>
                         <p><strong>Start:</strong> {{ $sub->updated_at }}</p>
                         <p><strong>End:</strong> {{ $sub->ends_at }}</p>
                     </div>
+
                 </div>
             @empty
                 <p class="text-gray-500">No subscription records found</p>
             @endforelse
+        </div>
         </div>
 
         {{-- ===== SAVED CARDS ===== --}}

@@ -54,8 +54,11 @@
                 </div>
 
                 <div class="flex items-end">
-                    <button class="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
+                    <button type="submit" name="filter" value="1" class="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
                         Apply Filters
+                    </button>
+                    <button type="submit" name="export" value="1" class="px-5 ml-5 py-2 outline-blue-600 text-blue-600 rounded-lg shadow hover:bg-blue-700 hover:text-white">
+                        Export
                     </button>
                 </div>
             </form>

@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TranslationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){
@@ -23,9 +26,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/{user}', [\App\Http\Controllers\UserController::class, 'show'])
         ->name('users.show');
 
+    Route::post('/users/{userid}/change-plan',
+        [UserController::class, 'changePlan']
+    )->name('users.change-plan');
+
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
     Route::get('/transactions/print/{id}', [TransactionController::class, 'print'])->name('transactions.print');
+
+    Route::resource('translations', TranslationController::class)->except(['show']);
+
+    Route::resource('enterprises', EnterpriseController::class);
 });
 
 require __DIR__.'/auth.php';
