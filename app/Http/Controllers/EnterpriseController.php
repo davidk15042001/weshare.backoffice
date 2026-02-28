@@ -70,8 +70,7 @@ class EnterpriseController extends Controller
 
     public function destroy($enterprise)
     {
-        $enterpriseDetails = $this->appDBConnect->find($enterprise);
-        $enterpriseDetails->delete();
+        $enterpriseDetails = $this->appDBConnect->where("id", $enterprise)->delete();
         return back()->with('success', 'Enterprise deleted');
     }
 }
