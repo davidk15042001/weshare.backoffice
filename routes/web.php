@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppSettingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\ProfileController;
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('translations', TranslationController::class)->except(['show']);
 
     Route::resource('enterprises', EnterpriseController::class);
+    Route::get('/app-settings/legal', [AppSettingController::class, 'editLegal'])->name('legal.index');
+    Route::post('/app-settings/legal', [AppSettingController::class, 'updateLegal'])->name('legal.update');
 });
 
 require __DIR__.'/auth.php';

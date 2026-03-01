@@ -32,6 +32,12 @@
                         {{ __('Team Sites') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('legal.index')" :active="request()->routeIs('legal.*')">
+                        {{ __('Legal') }}
+                    </x-nav-link>
+                </div>
                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('translations.index')" :active="request()->routeIs('translations.*')">
                         {{ __('Translations') }}
@@ -99,6 +105,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('enterprises.index')" :active="request()->routeIs('enterprises.*')">
                 {{ __('Team Sites') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('legal.index')" :active="request()->routeIs('legal.*')">
+                {{ __('Legal') }}
             </x-responsive-nav-link>
         </div>
 
